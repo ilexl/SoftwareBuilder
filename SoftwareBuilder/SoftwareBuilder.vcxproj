@@ -155,17 +155,21 @@
     <ClInclude Include="src\SoftwareBuilder\Events\Event.h" />
     <ClInclude Include="src\SoftwareBuilder\Events\KeyEvent.h" />
     <ClInclude Include="src\SoftwareBuilder\Events\MouseEvent.h" />
+    <ClInclude Include="src\sbpch.h" />
+    <ClInclude Include="src\SoftwareBuilder\Layer.h" />
+    <ClInclude Include="src\SoftwareBuilder\LayerStack.h" />
     <ClInclude Include="src\SoftwareBuilder\Log.h" />
     <ClInclude Include="src\SoftwareBuilder\Window.h" />
-    <ClInclude Include="src\sbpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\SoftwareBuilder\Application.cpp" />
-    <ClCompile Include="src\SoftwareBuilder\Log.cpp" />
     <ClCompile Include="src\sbpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\SoftwareBuilder\Application.cpp" />
+    <ClCompile Include="src\SoftwareBuilder\Layer.cpp" />
+    <ClCompile Include="src\SoftwareBuilder\LayerStack.cpp" />
+    <ClCompile Include="src\SoftwareBuilder\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

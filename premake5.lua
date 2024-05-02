@@ -65,14 +65,17 @@ project "SoftwareBuilder"
 
 	filter "configurations:Debug"
 		defines "SB_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Debug"
 		defines "SB_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Debug"
 		defines "SB_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -102,7 +105,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -112,12 +114,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "SB_DEBUG"
+		buildoptions "/MD"
 		symbols "On"
 
 	filter "configurations:Debug"
 		defines "SB_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Debug"
 		defines "SB_DIST"
+		buildoptions "/MD"
 		optimize "On"
