@@ -16,7 +16,6 @@ IncludeDir["GLFW"] = "SoftwareBuilder/vendor/GLFW/include"
 
 include "SoftwareBuilder/vendor/GLFW"
 
-
 project "SoftwareBuilder"
 	location "SoftwareBuilder"
 	kind "SharedLib"
@@ -44,7 +43,8 @@ project "SoftwareBuilder"
 	links 
 	{ 
 		"GLFW",
-		"opengl32.lib"
+		"opengl32.lib",
+		"dwmapi.lib"
 	}
 
 	filter "system:windows"
