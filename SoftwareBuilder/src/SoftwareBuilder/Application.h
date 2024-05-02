@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "SoftwareBuilder/Core.h"
 
 namespace SoftwareBuilder {
 	class SOFTWAREBUILDER_API Application

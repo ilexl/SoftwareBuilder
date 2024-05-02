@@ -4,6 +4,9 @@
     <Filter Include="SoftwareBuilder">
       <UniqueIdentifier>{17A4DF94-832F-4D59-8C40-D04DF84AA959}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SoftwareBuilder\Events">
+      <UniqueIdentifier>{1BF0BEB5-07EA-E707-F056-7E18DCEF4D74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SoftwareBuilder.h" />
@@ -16,9 +19,22 @@
     <ClInclude Include="src\SoftwareBuilder\EntryPoint.h">
       <Filter>SoftwareBuilder</Filter>
     </ClInclude>
+    <ClInclude Include="src\SoftwareBuilder\Events\ApplicationEvent.h">
+      <Filter>SoftwareBuilder\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoftwareBuilder\Events\Event.h">
+      <Filter>SoftwareBuilder\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoftwareBuilder\Events\KeyEvent.h">
+      <Filter>SoftwareBuilder\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoftwareBuilder\Events\MouseEvent.h">
+      <Filter>SoftwareBuilder\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\SoftwareBuilder\Log.h">
       <Filter>SoftwareBuilder</Filter>
     </ClInclude>
+    <ClInclude Include="src\sbpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\SoftwareBuilder\Application.cpp">
@@ -27,5 +43,6 @@
     <ClCompile Include="src\SoftwareBuilder\Log.cpp">
       <Filter>SoftwareBuilder</Filter>
     </ClCompile>
+    <ClCompile Include="src\sbpch.cpp" />
   </ItemGroup>
 </Project>

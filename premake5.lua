@@ -10,6 +10,13 @@ workspace "SoftwareBuilder"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "SoftwareBuilder/vendor/GLFW/include"
+
+include "SoftwareBuilder/vendor/GLFW"
+
+
 project "SoftwareBuilder"
 	location "SoftwareBuilder"
 	kind "SharedLib"
@@ -17,6 +24,9 @@ project "SoftwareBuilder"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "sbpch.h"
+	pchsource "SoftwareBuilder/src/sbpch.cpp"
 
 	files
 	{
@@ -26,7 +36,15 @@ project "SoftwareBuilder"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"SoftwareBuilder/src",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
