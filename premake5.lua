@@ -1,4 +1,6 @@
 workspace "SoftwareBuilder"
+	startproject "Sandbox"
+
 	architecture "x64"
 
 	configurations
@@ -19,6 +21,8 @@ IncludeDir["imgui"] = "SoftwareBuilder/vendor/imgui"
 include "SoftwareBuilder/vendor/GLFW"
 include "SoftwareBuilder/vendor/GLAD"
 include "SoftwareBuilder/vendor/imgui"
+
+
 
 project "SoftwareBuilder"
 	location "SoftwareBuilder"
