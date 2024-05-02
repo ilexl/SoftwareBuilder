@@ -2,6 +2,7 @@
 
 #include "SoftwareBuilder/Core.h"
 #include "Window.h"
+#include "SoftwareBuilder/Events/ApplicationEvent.h"
 
 namespace SoftwareBuilder {
 	class SOFTWAREBUILDER_API Application
@@ -11,7 +12,9 @@ namespace SoftwareBuilder {
 		Application();
 		virtual ~Application();
 		void Run();
+		void OnEvent(Event& e);
 	private:
+		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 
