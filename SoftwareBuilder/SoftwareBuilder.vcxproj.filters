@@ -19,6 +19,15 @@
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\SoftwareBuilder.h" />
+    <ClInclude Include="src\SoftwareBuilder\Application.h">
+      <Filter>SoftwareBuilder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoftwareBuilder\Core.h">
+      <Filter>SoftwareBuilder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoftwareBuilder\EntryPoint.h">
+      <Filter>SoftwareBuilder</Filter>
+    </ClInclude>
     <ClInclude Include="src\SoftwareBuilder\Events\ApplicationEvent.h">
       <Filter>SoftwareBuilder\Events</Filter>
     </ClInclude>
@@ -30,16 +39,6 @@
     </ClInclude>
     <ClInclude Include="src\SoftwareBuilder\Events\MouseEvent.h">
       <Filter>SoftwareBuilder\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="src\sbpch.h" />
-    <ClInclude Include="src\SoftwareBuilder\Application.h">
-      <Filter>SoftwareBuilder</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SoftwareBuilder\Core.h">
-      <Filter>SoftwareBuilder</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SoftwareBuilder\EntryPoint.h">
-      <Filter>SoftwareBuilder</Filter>
     </ClInclude>
     <ClInclude Include="src\SoftwareBuilder\Layer.h">
       <Filter>SoftwareBuilder</Filter>
@@ -53,12 +52,12 @@
     <ClInclude Include="src\SoftwareBuilder\Window.h">
       <Filter>SoftwareBuilder</Filter>
     </ClInclude>
+    <ClInclude Include="src\sbpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\sbpch.cpp" />
     <ClCompile Include="src\SoftwareBuilder\Application.cpp">
       <Filter>SoftwareBuilder</Filter>
     </ClCompile>
@@ -71,5 +70,6 @@
     <ClCompile Include="src\SoftwareBuilder\Log.cpp">
       <Filter>SoftwareBuilder</Filter>
     </ClCompile>
+    <ClCompile Include="src\sbpch.cpp" />
   </ItemGroup>
 </Project>
