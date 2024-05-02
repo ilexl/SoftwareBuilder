@@ -148,7 +148,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
-    <ClInclude Include="src\SoftwareBuilder\imgui\ImGuiLayer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\SoftwareBuilder.h" />
     <ClInclude Include="src\SoftwareBuilder\Application.h" />
@@ -162,16 +161,17 @@
     <ClInclude Include="src\SoftwareBuilder\LayerStack.h" />
     <ClInclude Include="src\SoftwareBuilder\Log.h" />
     <ClInclude Include="src\SoftwareBuilder\Window.h" />
+    <ClInclude Include="src\SoftwareBuilder\imgui\ImGuiLayer.h" />
     <ClInclude Include="src\sbpch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
-    <ClCompile Include="src\SoftwareBuilder\imgui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\SoftwareBuilder\Application.cpp" />
     <ClCompile Include="src\SoftwareBuilder\Layer.cpp" />
     <ClCompile Include="src\SoftwareBuilder\LayerStack.cpp" />
     <ClCompile Include="src\SoftwareBuilder\Log.cpp" />
+    <ClCompile Include="src\SoftwareBuilder\imgui\ImGuiLayer.cpp" />
     <ClCompile Include="src\sbpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
