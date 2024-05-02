@@ -3,8 +3,7 @@
 class ExampleLayer : public SoftwareBuilder::Layer
 {
 public:
-	ExampleLayer()
-		: Layer("Example")
+	ExampleLayer() : Layer("Example")
 	{
 	}
 
@@ -25,6 +24,7 @@ class Sandbox : public SoftwareBuilder::Application
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
+		PushOverlay(new SoftwareBuilder::ImGuiLayer());
 	}
 	~Sandbox() {
 
