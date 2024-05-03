@@ -1,7 +1,6 @@
 workspace "SoftwareBuilder"
-	startproject "Sandbox"
-
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -15,127 +14,125 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "SoftwareBuilder/vendor/GLFW/include"
-IncludeDir["GLAD"] = "SoftwareBuilder/vendor/GLAD/include"
-IncludeDir["imgui"] = "SoftwareBuilder/vendor/imgui"
+IncludeDir["Glad"] = "SoftwareBuilder/vendor/Glad/include"
+IncludeDir["ImGui"] = "SoftwareBuilder/vendor/imgui"
 
 include "SoftwareBuilder/vendor/GLFW"
-include "SoftwareBuilder/vendor/GLAD"
+include "SoftwareBuilder/vendor/Glad"
 include "SoftwareBuilder/vendor/imgui"
 
-
-
 project "SoftwareBuilder"
-	location "SoftwareBuilder"
-	kind "SharedLib"
-	language "C++"
+location "SoftwareBuilder"
+kind "SharedLib"
+language "C++"
+staticruntime "off"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	pchheader "sbpch.h"
-	pchsource "SoftwareBuilder/src/sbpch.cpp"
+pchheader "sbpch.h"
+pchsource "SoftwareBuilder/src/sbpch.cpp"
 
-	files
+files
+{
+	"%{prj.name}/src/**.h",
+	"%{prj.name}/src/**.cpp"
+}
+
+includedirs
+{
+	"%{prj.name}/src",
+	"%{prj.name}/vendor/spdlog/include",
+	"%{IncludeDir.GLFW}",
+	"%{IncludeDir.Glad}",
+	"%{IncludeDir.ImGui}"
+}
+
+links 
+{ 
+	"GLFW",
+	"Glad",
+	"ImGui",
+	"opengl32.lib"
+}
+
+filter "system:windows"
+	cppdialect "C++17"
+	systemversion "latest"
+
+	defines
 	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"SB_PLATFORM_WINDOWS",
+		"SB_BUILD_DLL",
+		"GLFW_INCLUDE_NONE"
 	}
 
-	includedirs
+	postbuildcommands
 	{
-		"%{prj.name}/vendor/spdlog/include",
-		"SoftwareBuilder/src",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.GLAD}",
-		"%{IncludeDir.imgui}"
+		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 	}
 
-	links 
-	{ 
-		"GLFW",
-		"GLAD",
-		"imgui",
-		"opengl32.lib",
-		"dwmapi.lib"
-	}
+filter "configurations:Debug"
+	defines "SB_DEBUG"
+	runtime "Debug"
+	symbols "On"
 
-	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "On"
-		systemversion "latest"
+filter "configurations:Release"
+	defines "SB_RELEASE"
+	runtime "Release"
+	optimize "On"
 
-		defines
-		{
-			"SB_PLATFORM_WINDOWS",
-			"SB_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
-		}
-
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
-	filter "configurations:Debug"
-		defines "SB_DEBUG"
-		buildoptions "/MDd"
-		symbols "On"
-
-	filter "configurations:Debug"
-		defines "SB_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
-
-	filter "configurations:Debug"
-		defines "SB_DIST"
-		buildoptions "/MD"
-		optimize "On"
+filter "configurations:Dist"
+	defines "SB_DIST"
+	runtime "Release"
+	optimize "On"
 
 project "Sandbox"
-	location "Sandbox"
-	kind "ConsoleApp"
-	language "C++"
+location "Sandbox"
+kind "ConsoleApp"
+language "C++"
+staticruntime "off"
 
-	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	files
+files
+{
+	"%{prj.name}/src/**.h",
+	"%{prj.name}/src/**.cpp"
+}
+
+includedirs
+{
+	"SoftwareBuilder/vendor/spdlog/include",
+	"SoftwareBuilder/src"
+}
+
+links
+{
+	"SoftwareBuilder"
+}
+
+filter "system:windows"
+	cppdialect "C++17"
+	systemversion "latest"
+
+	defines
 	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"SB_PLATFORM_WINDOWS"
 	}
 
-	includedirs
-	{
-		"SoftwareBuilder/vendor/spdlog/include",
-		"SoftwareBuilder/src"
-	}
+filter "configurations:Debug"
+	defines "SB_DEBUG"
+	runtime "Debug"
+	symbols "On"
 
-	links
-	{
-		"SoftwareBuilder"
-	}
+filter "configurations:Release"
+	defines "SB_RELEASE"
+	runtime "Release"
+	optimize "On"
 
-	filter "system:windows"
-		cppdialect "C++17"
-		systemversion "latest"
-
-		defines
-		{
-			"SB_PLATFORM_WINDOWS",
-		}
-
-	filter "configurations:Debug"
-		defines "SB_DEBUG"
-		buildoptions "/MD"
-		symbols "On"
-
-	filter "configurations:Debug"
-		defines "SB_RELEASE"
-		buildoptions "/MD"
-		optimize "On"
-
-	filter "configurations:Debug"
-		defines "SB_DIST"
-		buildoptions "/MD"
-		optimize "On"
+filter "configurations:Dist"
+	defines "SB_DIST"
+	runtime "Release"
+	optimize "On"
