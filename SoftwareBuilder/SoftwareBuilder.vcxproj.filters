@@ -24,6 +24,9 @@
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -49,6 +52,9 @@
     <ClInclude Include="src\SoftwareBuilder\Events\MouseEvent.h">
       <Filter>SoftwareBuilder\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\SoftwareBuilder\Input.h">
+      <Filter>SoftwareBuilder</Filter>
+    </ClInclude>
     <ClInclude Include="src\SoftwareBuilder\Layer.h">
       <Filter>SoftwareBuilder</Filter>
     </ClInclude>
@@ -65,10 +71,15 @@
       <Filter>SoftwareBuilder\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\sbpch.h" />
+    <ClInclude Include="src\SoftwareBuilder\KeyCodes.h" />
+    <ClInclude Include="src\SoftwareBuilder\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>

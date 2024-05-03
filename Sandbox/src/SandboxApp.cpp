@@ -9,12 +9,12 @@ public:
 
 	void OnUpdate() override
 	{
-		SB_INFO("ExampleLayer::Update");
+
 	}
 
 	void OnEvent(SoftwareBuilder::Event& event) override
 	{
-		SB_TRACE("{0}", event);
+
 	}
 
 };

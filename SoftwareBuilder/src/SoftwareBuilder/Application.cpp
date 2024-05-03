@@ -1,6 +1,7 @@
 #include "sbpch.h"
 #include "Application.h"
 #include <GLAD/glad.h>
+#include "Input.h"
 
 namespace SoftwareBuilder {
 
