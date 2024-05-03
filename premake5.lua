@@ -2,6 +2,9 @@ workspace "SoftwareBuilder"
 	architecture "x64"
 	startproject "Sandbox"
 
+	disablewarnings { "26498", "4251", "6285", "26800" }
+
+
 	configurations
 	{
 		"Debug",
@@ -22,43 +25,44 @@ include "SoftwareBuilder/vendor/Glad"
 include "SoftwareBuilder/vendor/imgui"
 
 project "SoftwareBuilder"
-location "SoftwareBuilder"
-kind "SharedLib"
-language "C++"
-staticruntime "off"
+	location "SoftwareBuilder"
+	kind "SharedLib"
+	language "C++"
+	staticruntime "off"
 
-targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-pchheader "sbpch.h"
-pchsource "SoftwareBuilder/src/sbpch.cpp"
+	pchheader "sbpch.h"
+	pchsource "SoftwareBuilder/src/sbpch.cpp"
 
-files
-{
-	"%{prj.name}/src/**.h",
-	"%{prj.name}/src/**.cpp"
-}
 
-includedirs
-{
-	"%{prj.name}/src",
-	"%{prj.name}/vendor/spdlog/include",
-	"%{IncludeDir.GLFW}",
-	"%{IncludeDir.Glad}",
-	"%{IncludeDir.ImGui}"
-}
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
 
-links 
-{ 
-	"GLFW",
-	"Glad",
-	"ImGui",
-	"opengl32.lib"
-}
+	includedirs
+	{
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
+	}
 
-filter "system:windows"
-	cppdialect "C++17"
-	systemversion "latest"
+	links 
+	{ 
+		"GLFW",
+		"Glad",
+		"ImGui",
+		"opengl32.lib"
+	}
+
+	filter "system:windows"
+		cppdialect "C++17"
+		systemversion "latest"
 
 	defines
 	{
@@ -72,67 +76,67 @@ filter "system:windows"
 		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 	}
 
-filter "configurations:Debug"
-	defines "SB_DEBUG"
-	runtime "Debug"
-	symbols "On"
+	filter "configurations:Debug"
+		defines "SB_DEBUG"
+		runtime "Debug"
+		symbols "On"
 
-filter "configurations:Release"
-	defines "SB_RELEASE"
-	runtime "Release"
-	optimize "On"
+	filter "configurations:Release"
+		defines "SB_RELEASE"
+		runtime "Release"
+		optimize "On"
 
-filter "configurations:Dist"
-	defines "SB_DIST"
-	runtime "Release"
-	optimize "On"
+	filter "configurations:Dist"
+		defines "SB_DIST"
+		runtime "Release"
+		optimize "On"
 
 project "Sandbox"
-location "Sandbox"
-kind "ConsoleApp"
-language "C++"
-staticruntime "off"
+	location "Sandbox"
+	kind "ConsoleApp"
+	language "C++"
+	staticruntime "off"
 
-targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-files
-{
-	"%{prj.name}/src/**.h",
-	"%{prj.name}/src/**.cpp"
-}
-
-includedirs
-{
-	"SoftwareBuilder/vendor/spdlog/include",
-	"SoftwareBuilder/src"
-}
-
-links
-{
-	"SoftwareBuilder"
-}
-
-filter "system:windows"
-	cppdialect "C++17"
-	systemversion "latest"
-
-	defines
+	files
 	{
-		"SB_PLATFORM_WINDOWS"
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
 	}
 
-filter "configurations:Debug"
-	defines "SB_DEBUG"
-	runtime "Debug"
-	symbols "On"
+	includedirs
+	{
+		"SoftwareBuilder/vendor/spdlog/include",
+		"SoftwareBuilder/src"
+	}
 
-filter "configurations:Release"
-	defines "SB_RELEASE"
-	runtime "Release"
-	optimize "On"
+	links
+	{
+		"SoftwareBuilder"
+	}
 
-filter "configurations:Dist"
-	defines "SB_DIST"
-	runtime "Release"
-	optimize "On"
+	filter "system:windows"
+		cppdialect "C++17"
+		systemversion "latest"
+
+		defines
+		{
+			"SB_PLATFORM_WINDOWS"
+		}
+
+	filter "configurations:Debug"
+		defines "SB_DEBUG"
+		runtime "Debug"
+		symbols "On"
+
+	filter "configurations:Release"
+		defines "SB_RELEASE"
+		runtime "Release"
+		optimize "On"
+
+	filter "configurations:Dist"
+		defines "SB_DIST"
+		runtime "Release"
+		optimize "On"
