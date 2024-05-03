@@ -1,9 +1,12 @@
-[submodule "SoftwareBuilder/vendor/spdlog"]
-	path = SoftwareBuilder/vendor/spdlog
-	url = https://github.com/gabime/spdlog
 [submodule "SoftwareBuilder/vendor/GLFW"]
 	path = SoftwareBuilder/vendor/GLFW
 	url = https://github.com/ilexl/glfw
 [submodule "SoftwareBuilder/vendor/imgui"]
 	path = SoftwareBuilder/vendor/imgui
 	url = https://github.com/ilexl/imgui
+[submodule "SoftwareBuilder/vendor/spdlog"]
+	path = SoftwareBuilder/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "SoftwareBuilder/vendor/glm"]
+	path = SoftwareBuilder/vendor/glm
+	url = https://github.com/g-truc/glm

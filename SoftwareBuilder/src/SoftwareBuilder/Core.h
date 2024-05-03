@@ -10,9 +10,13 @@
 	#error Software Builder only supports Windows!
 #endif
 
+#ifdef SB_DEBUG
+	#define HZ_ENABLE_ASSERTS
+#endif
+
 #ifdef HZ_ENABLE_ASSERTS
-	#define SB_ASSERT(x, ...) { if(!(x)) { HZ_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define SB_CORE_ASSERT(x, ...) { if(!(x)) { HZ_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define SB_ASSERT(x, ...) { if(!(x)) { SB_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define SB_CORE_ASSERT(x, ...) { if(!(x)) { SB_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 	#define SB_ASSERT(x, ...)
 	#define SB_CORE_ASSERT(x, ...)

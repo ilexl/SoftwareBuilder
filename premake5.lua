@@ -1,5 +1,9 @@
 workspace "SoftwareBuilder"
 	architecture "x64"
+	startproject "Sandbox"
+
+	disablewarnings { "26498", "4251", "6285", "26800" }
+
 
 	configurations
 	{
@@ -13,17 +17,21 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "SoftwareBuilder/vendor/GLFW/include"
-IncludeDir["GLAD"] = "SoftwareBuilder/vendor/GLAD/include"
-IncludeDir["imgui"] = "SoftwareBuilder/vendor/imgui"
+IncludeDir["Glad"] = "SoftwareBuilder/vendor/Glad/include"
+IncludeDir["ImGui"] = "SoftwareBuilder/vendor/imgui"
+IncludeDir["glm"] = "SoftwareBuilder/vendor/glm"
 
-include "SoftwareBuilder/vendor/GLFW"
-include "SoftwareBuilder/vendor/GLAD"
-include "SoftwareBuilder/vendor/imgui"
+group "Dependencies"
+	include "SoftwareBuilder/vendor/GLFW"
+	include "SoftwareBuilder/vendor/Glad"
+	include "SoftwareBuilder/vendor/imgui"
+group ""
 
 project "SoftwareBuilder"
 	location "SoftwareBuilder"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -31,66 +39,69 @@ project "SoftwareBuilder"
 	pchheader "sbpch.h"
 	pchsource "SoftwareBuilder/src/sbpch.cpp"
 
+
 	files
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
 	{
+		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"SoftwareBuilder/src",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.GLAD}",
-		"%{IncludeDir.imgui}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
 	{ 
 		"GLFW",
-		"GLAD",
-		"imgui",
-		"opengl32.lib",
-		"dwmapi.lib"
+		"Glad",
+		"ImGui",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
-		defines
-		{
-			"SB_PLATFORM_WINDOWS",
-			"SB_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
-		}
+	defines
+	{
+		"SB_PLATFORM_WINDOWS",
+		"SB_BUILD_DLL",
+		"GLFW_INCLUDE_NONE"
+	}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
+	postbuildcommands
+	{
+		("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
+	}
 
 	filter "configurations:Debug"
 		defines "SB_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
-	filter "configurations:Debug"
+	filter "configurations:Release"
 		defines "SB_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
-	filter "configurations:Debug"
+	filter "configurations:Dist"
 		defines "SB_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -98,13 +109,14 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
 	{
 		"SoftwareBuilder/vendor/spdlog/include",
-		"SoftwareBuilder/src"
+		"SoftwareBuilder/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -118,20 +130,20 @@ project "Sandbox"
 
 		defines
 		{
-			"SB_PLATFORM_WINDOWS",
+			"SB_PLATFORM_WINDOWS"
 		}
 
 	filter "configurations:Debug"
 		defines "SB_DEBUG"
-		buildoptions "/MD"
+		runtime "Debug"
 		symbols "On"
 
-	filter "configurations:Debug"
+	filter "configurations:Release"
 		defines "SB_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
-	filter "configurations:Debug"
+	filter "configurations:Dist"
 		defines "SB_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
