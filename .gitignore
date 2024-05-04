@@ -6,3 +6,7 @@ bin-int/
 # Files
 *.user
 Sandbox/imgui.ini
+Sandbox/Sandbox.vcxproj
+SoftwareBuilder/SoftwareBuilder.vcxproj
+SoftwareBuilder/vendor/GLAD/Glad.vcxproj
+SoftwareBuilder.sln

@@ -2,7 +2,7 @@ workspace "SoftwareBuilder"
 	architecture "x64"
 	startproject "Sandbox"
 
-	--disablewarnings { "26498", "4251", "6285", "26800" }
+	disablewarnings { "26498", "6285", "26800" }
 
 	configurations
 	{
