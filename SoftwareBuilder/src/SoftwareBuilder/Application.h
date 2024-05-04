@@ -6,6 +6,8 @@
 #include "SoftwareBuilder/Events/Event.h"
 #include "SoftwareBuilder/Events/ApplicationEvent.h"
 
+#include "SoftwareBuilder/ImGui/ImGuiLayer.h"
+
 namespace SoftwareBuilder {
 	class SOFTWAREBUILDER_API Application
 	{
@@ -22,6 +24,7 @@ namespace SoftwareBuilder {
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	private:
