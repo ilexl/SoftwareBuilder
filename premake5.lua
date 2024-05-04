@@ -2,8 +2,7 @@ workspace "SoftwareBuilder"
 	architecture "x64"
 	startproject "Sandbox"
 
-	disablewarnings { "26498", "4251", "6285", "26800" }
-
+	--disablewarnings { "26498", "4251", "6285", "26800" }
 
 	configurations
 	{
@@ -21,17 +20,18 @@ IncludeDir["Glad"] = "SoftwareBuilder/vendor/Glad/include"
 IncludeDir["ImGui"] = "SoftwareBuilder/vendor/imgui"
 IncludeDir["glm"] = "SoftwareBuilder/vendor/glm"
 
-group "Dependencies"
-	include "SoftwareBuilder/vendor/GLFW"
-	include "SoftwareBuilder/vendor/Glad"
-	include "SoftwareBuilder/vendor/imgui"
-group ""
+
+include "SoftwareBuilder/vendor/GLFW"
+include "SoftwareBuilder/vendor/Glad"
+include "SoftwareBuilder/vendor/imgui"
+
 
 project "SoftwareBuilder"
 	location "SoftwareBuilder"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -46,6 +46,11 @@ project "SoftwareBuilder"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -67,41 +72,36 @@ project "SoftwareBuilder"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
-	defines
-	{
-		"SB_PLATFORM_WINDOWS",
-		"SB_BUILD_DLL",
-		"GLFW_INCLUDE_NONE"
-	}
-
-	postbuildcommands
-	{
-		("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-	}
+		defines
+		{
+			"SB_PLATFORM_WINDOWS",
+			"SB_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
+		}
 
 	filter "configurations:Debug"
 		defines "SB_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "SB_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "SB_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -126,7 +126,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
@@ -137,14 +136,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "SB_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "SB_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "SB_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
