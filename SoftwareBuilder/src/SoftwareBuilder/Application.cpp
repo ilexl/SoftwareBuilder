@@ -9,6 +9,27 @@ namespace SoftwareBuilder {
 
 	Application* Application::s_Instance = nullptr;
 
+	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+	{
+		switch (type)
+		{
+		case SoftwareBuilder::ShaderDataType::Float:    return GL_FLOAT;
+		case SoftwareBuilder::ShaderDataType::Float2:   return GL_FLOAT;
+		case SoftwareBuilder::ShaderDataType::Float3:   return GL_FLOAT;
+		case SoftwareBuilder::ShaderDataType::Float4:   return GL_FLOAT;
+		case SoftwareBuilder::ShaderDataType::Mat3:     return GL_FLOAT;
+		case SoftwareBuilder::ShaderDataType::Mat4:     return GL_FLOAT;
+		case SoftwareBuilder::ShaderDataType::Int:      return GL_INT;
+		case SoftwareBuilder::ShaderDataType::Int2:     return GL_INT;
+		case SoftwareBuilder::ShaderDataType::Int3:     return GL_INT;
+		case SoftwareBuilder::ShaderDataType::Int4:     return GL_INT;
+		case SoftwareBuilder::ShaderDataType::Bool:     return GL_BOOL;
+		}
+
+		SB_CORE_ASSERT(false, "Unknown ShaderDataType!");
+		return 0;
+	}
+
 	Application::Application()
 	{
 		SB_CORE_ASSERT(!s_Instance, "Application already exists!");
