@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SoftwareBuilder/Core.h"
+#include "SoftwareBuilder/Core/Timestep.h"
 #include "SoftwareBuilder/Events/Event.h"
 
 namespace SoftwareBuilder {
@@ -14,6 +15,7 @@ namespace SoftwareBuilder {
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
