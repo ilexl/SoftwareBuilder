@@ -8,6 +8,8 @@
 
 #include "SoftwareBuilder/ImGui/ImGuiLayer.h"
 
+#include "SoftwareBuilder/Renderer/Shader.h"
+
 namespace SoftwareBuilder {
 	class SOFTWAREBUILDER_API Application
 	{
@@ -28,6 +30,7 @@ namespace SoftwareBuilder {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 	private:
 		static Application* s_Instance;
 	};
