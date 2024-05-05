@@ -20,6 +20,7 @@
 
 #include "SoftwareBuilder/Renderer/Buffer.h"
 #include "SoftwareBuilder/Renderer/Shader.h"
+#include "SoftwareBuilder/Renderer/Texture.h"
 #include "SoftwareBuilder/Renderer/VertexArray.h"
 
 #include "SoftwareBuilder/Renderer/OrthographicCamera.h"

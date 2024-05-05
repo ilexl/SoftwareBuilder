@@ -19,6 +19,8 @@ IncludeDir["GLFW"] = "SoftwareBuilder/vendor/GLFW/include"
 IncludeDir["Glad"] = "SoftwareBuilder/vendor/Glad/include"
 IncludeDir["ImGui"] = "SoftwareBuilder/vendor/imgui"
 IncludeDir["glm"] = "SoftwareBuilder/vendor/glm"
+IncludeDir["stb_image"] = "SoftwareBuilder/vendor/stb_image"
+
 
 group "Dependencies"
 	include "SoftwareBuilder/vendor/GLFW"
@@ -44,6 +46,8 @@ project "SoftwareBuilder"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -60,7 +64,8 @@ project "SoftwareBuilder"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links 

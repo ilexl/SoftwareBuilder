@@ -1,15 +1,17 @@
 #include <SoftwareBuilder.h>
+
+#include "Platform/OpenGL/OpenGLShader.h"
+
 #include "imgui/imgui.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Platform/OpenGL/OpenGLShader.h"
-
 class ExampleLayer : public SoftwareBuilder::Layer
 {
 public:
-	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+	ExampleLayer()
+		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
 	{
 		m_VertexArray.reset(SoftwareBuilder::VertexArray::Create());
 
@@ -19,7 +21,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<SoftwareBuilder::VertexBuffer> vertexBuffer;
+		SoftwareBuilder::Ref<SoftwareBuilder::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(SoftwareBuilder::VertexBuffer::Create(vertices, sizeof(vertices)));
 		SoftwareBuilder::BufferLayout layout = {
 			{ SoftwareBuilder::ShaderDataType::Float3, "a_Position" },
@@ -29,28 +31,29 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<SoftwareBuilder::IndexBuffer> indexBuffer;
+		SoftwareBuilder::Ref<SoftwareBuilder::IndexBuffer> indexBuffer;
 		indexBuffer.reset(SoftwareBuilder::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA.reset(SoftwareBuilder::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<SoftwareBuilder::VertexBuffer> squareVB;
+		SoftwareBuilder::Ref<SoftwareBuilder::VertexBuffer> squareVB;
 		squareVB.reset(SoftwareBuilder::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
-			{ SoftwareBuilder::ShaderDataType::Float3, "a_Position" }
+			{ SoftwareBuilder::ShaderDataType::Float3, "a_Position" },
+			{ SoftwareBuilder::ShaderDataType::Float2, "a_TexCoord" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<SoftwareBuilder::IndexBuffer> squareIB;
+		SoftwareBuilder::Ref<SoftwareBuilder::IndexBuffer> squareIB;
 		squareIB.reset(SoftwareBuilder::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -124,6 +127,46 @@ public:
 		)";
 
 		m_FlatColorShader.reset(SoftwareBuilder::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(SoftwareBuilder::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = SoftwareBuilder::Texture2D::Create("assets/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<SoftwareBuilder::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<SoftwareBuilder::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(SoftwareBuilder::Timestep ts) override
@@ -166,7 +209,11 @@ public:
 			}
 		}
 
-		SoftwareBuilder::Renderer::Submit(m_Shader, m_VertexArray);
+		m_Texture->Bind();
+		SoftwareBuilder::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		// Triangle
+		// SoftwareBuilder::Renderer::Submit(m_Shader, m_VertexArray);
 
 		SoftwareBuilder::Renderer::EndScene();
 	}
@@ -181,13 +228,14 @@ public:
 	void OnEvent(SoftwareBuilder::Event& event) override
 	{
 	}
-
 private:
-	std::shared_ptr<SoftwareBuilder::Shader> m_Shader;
-	std::shared_ptr<SoftwareBuilder::VertexArray> m_VertexArray;
+	SoftwareBuilder::Ref<SoftwareBuilder::Shader> m_Shader;
+	SoftwareBuilder::Ref<SoftwareBuilder::VertexArray> m_VertexArray;
 
-	std::shared_ptr<SoftwareBuilder::Shader> m_FlatColorShader;
-	std::shared_ptr<SoftwareBuilder::VertexArray> m_SquareVA;
+	SoftwareBuilder::Ref<SoftwareBuilder::Shader> m_FlatColorShader, m_TextureShader;
+	SoftwareBuilder::Ref<SoftwareBuilder::VertexArray> m_SquareVA;
+
+	SoftwareBuilder::Ref<SoftwareBuilder::Texture2D> m_Texture;
 
 	SoftwareBuilder::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
@@ -197,7 +245,6 @@ private:
 	float m_CameraRotationSpeed = 180.0f;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
-
 };
 
 class Sandbox : public SoftwareBuilder::Application
