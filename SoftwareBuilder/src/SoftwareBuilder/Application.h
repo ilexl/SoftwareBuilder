@@ -8,13 +8,17 @@
 
 #include "SoftwareBuilder/ImGui/ImGuiLayer.h"
 
+#include "SoftwareBuilder/Renderer/Shader.h"
+#include "SoftwareBuilder/Renderer/Buffer.h"
+#include "SoftwareBuilder/Renderer/VertexArray.h"
+
 namespace SoftwareBuilder {
 	class SOFTWAREBUILDER_API Application
 	{
 
 	public:
 		Application();
-		virtual ~Application();
+		virtual ~Application() = default;
 		void Run();
 		void OnEvent(Event& e);
 		void PushLayer(Layer* layer);
@@ -27,6 +31,11 @@ namespace SoftwareBuilder {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 	private:
 		static Application* s_Instance;
 	};

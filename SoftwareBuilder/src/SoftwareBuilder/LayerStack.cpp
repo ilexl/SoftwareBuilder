@@ -16,6 +16,7 @@ namespace SoftwareBuilder {
 	void LayerStack::PushLayer(Layer* layer)
 	{
 		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
+		m_LayerInsertIndex++;
 		layer->OnAttach();
 	}
 
@@ -27,9 +28,10 @@ namespace SoftwareBuilder {
 
 	void LayerStack::PopLayer(Layer* layer)
 	{
-		auto it = std::find(m_Layers.begin(), m_Layers.end(), layer);
+		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_LayerInsertIndex, layer);
 		if (it != m_Layers.end())
 		{
+			layer->OnDetach();
 			m_Layers.erase(it);
 			m_LayerInsertIndex--;
 		}
@@ -37,9 +39,12 @@ namespace SoftwareBuilder {
 
 	void LayerStack::PopOverlay(Layer* overlay)
 	{
-		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
+		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_LayerInsertIndex, overlay);
 		if (it != m_Layers.end())
+		{
+			overlay->OnDetach();
 			m_Layers.erase(it);
+		}
 	}
 
 }
