@@ -9,7 +9,7 @@ namespace SoftwareBuilder {
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application() : m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+	Application::Application() : m_Camera(-1.6f, 1.6f, -0.9f, 0.9f) // This is the aspect ratio - 16:9
 	{
 		SB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
