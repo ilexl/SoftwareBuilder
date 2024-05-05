@@ -12,6 +12,8 @@
 #include "SoftwareBuilder/Renderer/Buffer.h"
 #include "SoftwareBuilder/Renderer/VertexArray.h"
 
+#include "SoftwareBuilder/Renderer/OrthographicCamera.h"
+
 namespace SoftwareBuilder {
 	class SOFTWAREBUILDER_API Application
 	{
@@ -36,6 +38,8 @@ namespace SoftwareBuilder {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};
