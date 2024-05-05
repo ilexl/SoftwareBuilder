@@ -6,8 +6,4 @@ namespace SoftwareBuilder {
 	{
 	}
 
-	Layer::~Layer()
-	{
-
-	}
 }
