@@ -20,11 +20,11 @@ IncludeDir["Glad"] = "SoftwareBuilder/vendor/Glad/include"
 IncludeDir["ImGui"] = "SoftwareBuilder/vendor/imgui"
 IncludeDir["glm"] = "SoftwareBuilder/vendor/glm"
 
-
-include "SoftwareBuilder/vendor/GLFW"
-include "SoftwareBuilder/vendor/Glad"
-include "SoftwareBuilder/vendor/imgui"
-
+group "Dependencies"
+	include "SoftwareBuilder/vendor/GLFW"
+	include "SoftwareBuilder/vendor/Glad"
+	include "SoftwareBuilder/vendor/imgui"
+group ""
 
 project "SoftwareBuilder"
 	location "SoftwareBuilder"
