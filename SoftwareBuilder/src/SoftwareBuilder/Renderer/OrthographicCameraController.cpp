@@ -1,5 +1,5 @@
 #include "sbpch.h"
-#include "OrthographicCameraController.h"
+#include "SoftwareBuilder/Renderer/OrthographicCameraController.h"
 
 #include "SoftwareBuilder/Core/Input.h"
 #include "SoftwareBuilder/Core/KeyCodes.h"

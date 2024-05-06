@@ -2,6 +2,8 @@
 
 // For use by software builder applications
 
+#include "SoftwareBuilder/Core/Core.h"
+
 #include "SoftwareBuilder/Core/Application.h"
 #include "SoftwareBuilder/Core/Layer.h"
 #include "SoftwareBuilder/Core/Log.h"

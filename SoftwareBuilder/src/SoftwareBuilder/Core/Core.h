@@ -45,24 +45,6 @@
 #endif // End of platform detection
 
 #pragma endregion
-#pragma region DLL support
-
-// DLL support
-#ifdef SB_PLATFORM_WINDOWS
-	#if SB_DYNAMIC_LINK
-		#ifdef SB_BUILD_DLL
-			#define SOFTWAREBUILDER_API __declspec(dllexport)
-		#else
-			#define SOFTWAREBUILDER_API __declspec(dllimport)
-		#endif
-	#else
-		#define SOFTWAREBUILDER_API
-	#endif
-#else
-	#error SoftwareBuilder only supports Windows!
-#endif // End of DLL support
-
-#pragma endregion
 #pragma region Definitions Preprocessor
 
 #ifdef SB_DEBUG

@@ -1,9 +1,9 @@
 #include "sbpch.h"
-#include "RenderCommand.h"
+#include "SoftwareBuilder/Renderer/RenderCommand.h"
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
 namespace SoftwareBuilder {
 
-	Scope<RendererAPI> RenderCommand::s_RendererAPI = CreateScope<OpenGLRendererAPI>();
+	Scope<RendererAPI> RenderCommand::s_RendererAPI = RendererAPI::Create();
 }

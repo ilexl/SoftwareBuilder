@@ -7,7 +7,7 @@
 #include "SoftwareBuilder/Events/MouseEvent.h"
 
 namespace SoftwareBuilder {
-	class SOFTWAREBUILDER_API ImGuiLayer : public Layer
+	class  ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

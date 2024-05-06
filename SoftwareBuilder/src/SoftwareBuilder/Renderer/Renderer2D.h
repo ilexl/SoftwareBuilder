@@ -1,8 +1,7 @@
 #pragma once
 
-#include "OrthographicCamera.h"
-
-#include "Texture.h"
+#include "SoftwareBuilder/Renderer/OrthographicCamera.h"
+#include "SoftwareBuilder/Renderer/Texture.h"
 
 namespace SoftwareBuilder {
 

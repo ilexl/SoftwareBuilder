@@ -1,7 +1,7 @@
 #include "sbpch.h"
-#include "Texture.h"
 
-#include "Renderer.h"
+#include "SoftwareBuilder/Renderer/Texture.h"
+#include "SoftwareBuilder/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace SoftwareBuilder {

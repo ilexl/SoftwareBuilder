@@ -4,7 +4,7 @@
 
 namespace SoftwareBuilder {
 
-	class SOFTWAREBUILDER_API Input
+	class Input
 	{
 	protected:
 		Input() = default;

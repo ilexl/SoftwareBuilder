@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Window.h"
+#include "SoftwareBuilder/Core/Window.h"
 #include "SoftwareBuilder/Core/Core.h"
 #include "SoftwareBuilder/Core/LayerStack.h"
 #include "SoftwareBuilder/Events/Event.h"
@@ -13,7 +13,7 @@ namespace SoftwareBuilder {
 	{
 	public:
 		Application();
-		virtual ~Application() = default;
+		virtual ~Application();
 
 		void Run();
 

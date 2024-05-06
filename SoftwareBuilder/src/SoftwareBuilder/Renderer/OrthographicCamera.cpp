@@ -1,5 +1,5 @@
 #include "sbpch.h"
-#include "OrthographicCamera.h"
+#include "SoftwareBuilder/Renderer/OrthographicCamera.h"
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace SoftwareBuilder {

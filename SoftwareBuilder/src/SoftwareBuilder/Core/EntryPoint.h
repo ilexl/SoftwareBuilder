@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SoftwareBuilder/Core/Core.h"
+
 #ifdef SB_PLATFORM_WINDOWS
 
 extern SoftwareBuilder::Application* SoftwareBuilder::CreateApplication();

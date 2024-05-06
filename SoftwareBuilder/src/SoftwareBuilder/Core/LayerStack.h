@@ -1,14 +1,14 @@
 #pragma once
 #include "SoftwareBuilder/Core/Core.h"
-#include "Layer.h"
+#include "SoftwareBuilder/Core/Layer.h"
 
 #include <vector>
 
 namespace SoftwareBuilder {
-	class SOFTWAREBUILDER_API LayerStack
+	class  LayerStack
 	{
 	public:
-		LayerStack();
+		LayerStack() = default;
 		~LayerStack();
 
 		void PushLayer(Layer* layer);

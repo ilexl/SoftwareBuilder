@@ -1,5 +1,5 @@
 #include "sbpch.h"
-#include "OpenGLContext.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
@@ -32,7 +32,7 @@ namespace SoftwareBuilder {
 		glGetIntegerv(GL_MAJOR_VERSION, &versionMajor);
 		glGetIntegerv(GL_MINOR_VERSION, &versionMinor);
 
-		SB_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "Hazel requires at least OpenGL version 4.5!");
+		SB_CORE_ASSERT(versionMajor > 4 || (versionMajor == 4 && versionMinor >= 5), "SoftwareBuilder requires at least OpenGL version 4.5!");
 #endif
 	}
 
