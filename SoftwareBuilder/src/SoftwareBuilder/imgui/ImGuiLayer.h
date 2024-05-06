@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SoftwareBuilder/Layer.h"
+#include "SoftwareBuilder/Core/Layer.h"
 
 #include "SoftwareBuilder/Events/ApplicationEvent.h"
 #include "SoftwareBuilder/Events/KeyEvent.h"

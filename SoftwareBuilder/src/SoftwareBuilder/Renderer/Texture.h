@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "SoftwareBuilder/Core.h"
+#include "SoftwareBuilder/Core/Core.h"
 
 namespace SoftwareBuilder {
 	class Texture

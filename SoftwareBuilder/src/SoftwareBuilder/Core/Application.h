@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Window.h"
-#include "SoftwareBuilder/Core.h"
-#include "SoftwareBuilder/LayerStack.h"
+#include "SoftwareBuilder/Core/Core.h"
+#include "SoftwareBuilder/Core/LayerStack.h"
 #include "SoftwareBuilder/Events/Event.h"
 #include "SoftwareBuilder/Events/ApplicationEvent.h"
 #include "SoftwareBuilder/Core/Timestep.h"

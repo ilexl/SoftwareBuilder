@@ -2,16 +2,16 @@
 
 // For use by software builder applications
 
-#include "SoftwareBuilder/Application.h"
-#include "SoftwareBuilder/Layer.h"
-#include "SoftwareBuilder/Log.h"
+#include "SoftwareBuilder/Core/Application.h"
+#include "SoftwareBuilder/Core/Layer.h"
+#include "SoftwareBuilder/Core/Log.h"
 
 #include "SoftwareBuilder/Core/Timestep.h"
 
-#include "SoftwareBuilder/Input.h"
-#include "SoftwareBuilder/KeyCodes.h"
-#include "SoftwareBuilder/MouseButtonCodes.h"
-#include "SoftwareBuilder/OrthographicCameraController.h"
+#include "SoftwareBuilder/Core/Input.h"
+#include "SoftwareBuilder/Core/KeyCodes.h"
+#include "SoftwareBuilder/Core/MouseButtonCodes.h"
+#include "SoftwareBuilder/Renderer/OrthographicCameraController.h"
 
 #include "SoftwareBuilder/imgui/ImGuiLayer.h"
 
@@ -28,5 +28,5 @@
 // ---------------------------------------------------
 
 // ------------------- Entry Point -------------------
-#include "SoftwareBuilder/EntryPoint.h"
+#include "SoftwareBuilder/Core/EntryPoint.h"
 // ------------------- Entry Point -------------------

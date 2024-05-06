@@ -1,6 +1,6 @@
 #include "sbpch.h"
 #include "Application.h"
-#include "SoftwareBuilder/Log.h"
+#include "SoftwareBuilder/Core/Log.h"
 #include "SoftwareBuilder/Renderer/Renderer.h"
 #include "Input.h"
 #include <GLFW/glfw3.h>

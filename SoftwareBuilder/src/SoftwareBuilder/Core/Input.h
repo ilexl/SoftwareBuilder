@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SoftwareBuilder/Core.h"
+#include "SoftwareBuilder/Core/Core.h"
 
 namespace SoftwareBuilder {
 

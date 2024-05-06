@@ -2,7 +2,7 @@
 
 #include "sbpch.h"
 #include "spdlog/fmt/ostr.h"
-#include "SoftwareBuilder/Core.h"
+#include "SoftwareBuilder/Core/Core.h"
 
 namespace SoftwareBuilder {
 

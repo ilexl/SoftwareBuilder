@@ -1,8 +1,8 @@
 #include "sbpch.h"
 #include "OrthographicCameraController.h"
 
-#include "SoftwareBuilder/Input.h"
-#include "SoftwareBuilder/KeyCodes.h"
+#include "SoftwareBuilder/Core/Input.h"
+#include "SoftwareBuilder/Core/KeyCodes.h"
 
 namespace SoftwareBuilder
 {
