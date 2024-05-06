@@ -2,7 +2,7 @@
 
 #include "sbpch.h"
 
-#include "SoftwareBuilder/Core.h"
+#include "SoftwareBuilder/Core/Core.h"
 #include "SoftwareBuilder/Events/Event.h"
 
 namespace SoftwareBuilder {

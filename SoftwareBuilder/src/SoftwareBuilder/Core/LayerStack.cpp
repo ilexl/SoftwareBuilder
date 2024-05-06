@@ -29,7 +29,7 @@ namespace SoftwareBuilder {
 	void LayerStack::PopLayer(Layer* layer)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_LayerInsertIndex, layer);
-		if (it != m_Layers.end())
+		if (it != m_Layers.begin() + m_LayerInsertIndex) // it != m_Layers.end() *** Has been mentioned may now work - revert to end if any bugs
 		{
 			layer->OnDetach();
 			m_Layers.erase(it);
@@ -40,7 +40,7 @@ namespace SoftwareBuilder {
 	void LayerStack::PopOverlay(Layer* overlay)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_LayerInsertIndex, overlay);
-		if (it != m_Layers.end())
+		if (it != m_Layers.begin() + m_LayerInsertIndex)
 		{
 			overlay->OnDetach();
 			m_Layers.erase(it);

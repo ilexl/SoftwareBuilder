@@ -1,5 +1,5 @@
 #pragma once
-#include "SoftwareBuilder/Core.h"
+#include "SoftwareBuilder/Core/Core.h"
 #include "Layer.h"
 
 #include <vector>
@@ -23,4 +23,3 @@ namespace SoftwareBuilder {
 		unsigned int m_LayerInsertIndex = 0;
 	};
 }
-

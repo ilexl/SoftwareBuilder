@@ -1,7 +1,7 @@
 #include "sbpch.h"
 #include "WindowsInput.h"
 
-#include "SoftwareBuilder/Application.h"
+#include "SoftwareBuilder/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace SoftwareBuilder {
