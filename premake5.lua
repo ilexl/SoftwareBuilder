@@ -86,7 +86,6 @@ project "SoftwareBuilder"
 
 		defines
 		{
-			"SB_PLATFORM_WINDOWS",
 			"SB_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
@@ -137,11 +136,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		systemversion "latest"
-
-		defines
-		{
-			"SB_PLATFORM_WINDOWS"
-		}
 
 	filter "configurations:Debug"
 		defines "SB_DEBUG"

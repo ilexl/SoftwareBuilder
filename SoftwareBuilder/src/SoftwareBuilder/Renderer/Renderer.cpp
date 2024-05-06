@@ -5,7 +5,7 @@
 
 namespace SoftwareBuilder
 {
-	Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData;
+	Scope<Renderer::SceneData> Renderer::s_SceneData = CreateScope<Renderer::SceneData>();
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
 	{

@@ -1,12 +1,16 @@
 [submodule "SoftwareBuilder/vendor/GLFW"]
 	path = SoftwareBuilder/vendor/GLFW
 	url = https://github.com/ilexl/glfw
+	branch = v1.x
 [submodule "SoftwareBuilder/vendor/imgui"]
 	path = SoftwareBuilder/vendor/imgui
 	url = https://github.com/ilexl/imgui
+	branch = master
 [submodule "SoftwareBuilder/vendor/spdlog"]
 	path = SoftwareBuilder/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+	branch = docking
 [submodule "SoftwareBuilder/vendor/glm"]
 	path = SoftwareBuilder/vendor/glm
 	url = https://github.com/g-truc/glm
+	branch = master
