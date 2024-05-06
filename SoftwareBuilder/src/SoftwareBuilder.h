@@ -11,6 +11,7 @@
 #include "SoftwareBuilder/Input.h"
 #include "SoftwareBuilder/KeyCodes.h"
 #include "SoftwareBuilder/MouseButtonCodes.h"
+#include "SoftwareBuilder/OrthographicCameraController.h"
 
 #include "SoftwareBuilder/imgui/ImGuiLayer.h"
 
