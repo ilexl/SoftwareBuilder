@@ -13,9 +13,17 @@ int main(int argc, char** argv)
 	SoftwareBuilder::Log::Init();
 	SB_CORE_INFO("Logger Initialized!");
 
+	SB_PROFILE_BEGIN_SESSION("Startup", "Software BuilderProfile-Startup.json");
 	auto app = SoftwareBuilder::CreateApplication();
+	SB_PROFILE_END_SESSION();
+
+	SB_PROFILE_BEGIN_SESSION("Runtime", "Software BuilderProfile-Runtime.json");
 	app->Run();
+	SB_PROFILE_END_SESSION();
+
+	SB_PROFILE_BEGIN_SESSION("Startup", "Software BuilderProfile-Shutdown.json");
 	delete app;
+	SB_PROFILE_END_SESSION();
 }
 
 #endif
