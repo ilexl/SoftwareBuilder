@@ -2,7 +2,7 @@ workspace "SoftwareBuilder"
 	architecture "x64"
 	startproject "Sandbox"
 
-	disablewarnings { "26498", "6285", "26800" }
+	disablewarnings { "26498", "6285", "26800", "6031" }
 
 	configurations
 	{
@@ -127,6 +127,11 @@ project "Sandbox"
 		"SoftwareBuilder/src",
 		"SoftwareBuilder/vendor",
 		"%{IncludeDir.glm}"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	links
