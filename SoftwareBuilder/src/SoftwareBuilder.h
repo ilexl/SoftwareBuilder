@@ -17,6 +17,7 @@
 
 // ------------------- Renderer ----------------------
 #include "SoftwareBuilder/Renderer/Renderer.h"
+#include "SoftwareBuilder/Renderer/Renderer2D.h"
 #include "SoftwareBuilder/Renderer/RenderCommand.h"
 
 #include "SoftwareBuilder/Renderer/Buffer.h"
