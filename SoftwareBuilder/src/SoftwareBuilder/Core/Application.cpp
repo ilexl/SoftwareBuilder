@@ -13,6 +13,8 @@ namespace SoftwareBuilder {
 
 	Application::Application()
 	{
+		SB_PROFILE_FUNCTION();
+
 		SB_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
@@ -27,21 +29,29 @@ namespace SoftwareBuilder {
 
 	Application::~Application()
 	{
+		SB_PROFILE_FUNCTION();
+
 		Renderer::Shutdown();
 	}
 
 	void Application::PushLayer(Layer* layer)
 	{
+		SB_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		SB_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(layer);
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+		SB_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(SB_BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(SB_BIND_EVENT_FN(Application::OnWindowResize));
@@ -56,22 +66,34 @@ namespace SoftwareBuilder {
 
 	void Application::Run()
 	{
+		SB_PROFILE_FUNCTION();
+
 		while (m_Running)
 		{
+			SB_PROFILE_FUNCTION("RunLoop");
+
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized)
 			{
-				for (Layer* layer : m_LayerStack)
-					layer->OnUpdate(timestep);
-			}
+				{
+					SB_PROFILE_FUNCTION("LayerStack OnUpdate");
+					for (Layer* layer : m_LayerStack)
+						layer->OnUpdate(timestep);
+				}
 
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-			m_ImGuiLayer->End();
+				{
+					SB_PROFILE_FUNCTION("LayerStack OnImGUIRender");
+
+					m_ImGuiLayer->Begin();
+					for (Layer* layer : m_LayerStack)
+						layer->OnImGuiRender();
+
+				}
+				m_ImGuiLayer->End();
+			}
 
 			m_Window->OnUpdate();
 		}
@@ -79,6 +101,8 @@ namespace SoftwareBuilder {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		SB_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

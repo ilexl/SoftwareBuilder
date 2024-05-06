@@ -15,6 +15,8 @@ namespace SoftwareBuilder {
 
 	void OpenGLContext::Init()
 	{
+		SB_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		SB_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -38,6 +40,8 @@ namespace SoftwareBuilder {
 
 	void OpenGLContext::SwapBuffers()
 	{
+		SB_PROFILE_FUNCTION();
+
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

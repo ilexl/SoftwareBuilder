@@ -25,7 +25,7 @@ void Sandbox2D::OnUpdate(SoftwareBuilder::Timestep ts)
 
 	// Update
 	{
-		SB_PROFILE_SCOPE("CameraController::OnUpdate");
+		SB_PROFILE_SCOPE("CameraController OnUpdate");
 		m_CameraController.OnUpdate(ts);
 	}
 
